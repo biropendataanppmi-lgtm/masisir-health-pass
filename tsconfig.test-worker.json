@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.test-worker.tsbuildinfo",
+    "target": "ES2023",
+    "lib": ["ES2023"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "types": ["node", "./worker/worker-configuration.d.ts"]
+  },
+  "include": ["tests/api.test.ts", "tests/d1-shim.ts", "tests/privacy.test.ts", "tests/markdown.test.ts", "worker", "shared"]
+}

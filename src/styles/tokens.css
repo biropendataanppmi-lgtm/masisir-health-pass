@@ -1,0 +1,84 @@
+/* Design tokens — Masisir Health Pass.
+   Palette from the product brief. Every text/background pair used in the UI
+   meets WCAG AA (4.5:1) — see docs/DESIGN-SYSTEM.md for measured ratios. */
+:root {
+  /* Brand palette */
+  --c-deep-teal: #123f46;
+  --c-medical-blue: #347f91;
+  --c-soft-green: #79b99a;
+  --c-pale-mint: #e9f3ef;
+  --c-off-white: #f7f9f8;
+  --c-charcoal: #263b3a;
+
+  /* Derived shades (tints/shades of the palette, not new hues) */
+  --c-deep-teal-900: #0b2b30;
+  --c-deep-teal-700: #1a515a;
+  --c-medical-blue-700: #2a6b7a; /* blue text on light bg (AA) */
+  --c-soft-green-700: #356f53;   /* green text on light bg (AA, 5.2:1 on mint) */
+  --c-mint-200: #d3e7df;
+  --c-line: #dbe5e1;
+  --c-muted: #566b69;            /* secondary text on off-white (AA) */
+  --c-white: #ffffff;
+
+  /* Status */
+  --c-danger: #b42318;
+  --c-danger-bg: #fdecea;
+  --c-warning: #8a5a00;
+  --c-warning-bg: #fff4dc;
+  --c-success: var(--c-soft-green-700);
+  --c-success-bg: var(--c-pale-mint);
+  --c-info: var(--c-medical-blue-700);
+  --c-info-bg: #e6f1f4;
+
+  /* Semantic roles */
+  --bg: var(--c-off-white);
+  --surface: var(--c-white);
+  --surface-alt: var(--c-pale-mint);
+  --text: var(--c-charcoal);
+  --text-muted: var(--c-muted);
+  --primary: var(--c-deep-teal);
+  --primary-hover: var(--c-deep-teal-700);
+  --secondary: var(--c-medical-blue);
+  --accent: var(--c-soft-green);
+  --focus: #1f8fa6;
+
+  /* Typography */
+  --font-sans: "Plus Jakarta Sans", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-md: 1.125rem;
+  --fs-lg: 1.375rem;
+  --fs-xl: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  --fs-2xl: clamp(1.875rem, 1.4rem + 2vw, 2.75rem);
+  --fs-3xl: clamp(2.25rem, 1.6rem + 3vw, 3.5rem);
+  --lh-tight: 1.15;
+  --lh-snug: 1.35;
+  --lh-body: 1.65;
+
+  /* Spacing (4px scale) */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4rem;
+  --s-9: 6rem;
+
+  /* Shape & depth */
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 22px;
+  --r-pill: 999px;
+  --shadow-sm: 0 1px 2px rgba(18, 63, 70, 0.06), 0 1px 1px rgba(18, 63, 70, 0.04);
+  --shadow-md: 0 8px 24px -12px rgba(18, 63, 70, 0.22);
+  --shadow-lg: 0 24px 48px -24px rgba(18, 63, 70, 0.35);
+
+  --container: 1180px;
+  --gutter: clamp(1rem, 4vw, 2rem);
+  --header-h: 68px;
+  --bottom-nav-h: 64px;
+  --t-fast: 140ms ease;
+}
