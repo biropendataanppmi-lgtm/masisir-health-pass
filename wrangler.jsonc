@@ -5,7 +5,13 @@
   "compatibility_date": "2026-10-01",
   "compatibility_flags": ["nodejs_compat"],
   "observability": { "enabled": true },
+  // Lets a plain `npx wrangler deploy` (Workers Builds' default deploy
+  // command) build the site first, even when no build command is set.
+  "build": { "command": "npx vite build" },
   "assets": {
+    // Used only when Wrangler deploys without Vite (e.g. a plain
+    // `npx wrangler deploy`); the Vite plugin sets this itself.
+    "directory": "./dist/client",
     // SPA: unknown non-API paths fall back to index.html; /api/* always hits the Worker.
     "not_found_handling": "single-page-application",
     "run_worker_first": ["/api/*"]

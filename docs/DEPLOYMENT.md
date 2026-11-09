@@ -13,7 +13,7 @@ Di dashboard Cloudflare → Workers & Pages → `masisir-health-pass` → Settin
 | Deploy command | `npm run deploy` |
 | Root directory | `/` |
 
-`npm run deploy` menjalankan `wrangler deploy` lalu `wrangler d1 migrations apply DB --remote`, sehingga skema database selalu ikut diperbarui. Jika deploy command dibiarkan `npx wrangler deploy`, situs tetap terbit tetapi API akan error karena tabel belum dibuat.
+`wrangler.jsonc` juga punya `build.command`, jadi `npx wrangler deploy` saja tetap membangun situs terlebih dahulu. `npm run deploy` menjalankan `wrangler deploy` lalu `wrangler d1 migrations apply DB --remote`, sehingga skema database selalu ikut diperbarui. Jika deploy command dibiarkan `npx wrangler deploy`, situs tetap terbit tetapi API akan error karena tabel belum dibuat.
 
 ## Konfigurasi
 
