@@ -109,7 +109,8 @@
   color: var(--c-deep-teal);
   flex: none;
 }
-.brand__mark { width: 38px; height: 38px; }
+.brand__mark { flex: none; display: block; }
+.brand__mark img { height: 42px; width: auto; }
 .brand__text { display: grid; line-height: 1.05; }
 .brand__name { font-weight: 800; font-size: 1.05rem; letter-spacing: -0.02em; }
 .brand__org { font-size: var(--fs-xs); color: var(--text-muted); font-weight: 600; }
@@ -265,3 +266,4 @@
   .site-footer__grid { grid-template-columns: 1fr 1fr; }
   .site-footer__about { grid-column: 1 / -1; }
 }
+.site-footer .brand__mark img { height: 56px; }

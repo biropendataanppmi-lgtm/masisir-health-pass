@@ -4,7 +4,7 @@ Platform sengaja **tidak** mengarang data. Semua bagian di bawah tampil sebagai 
 
 ## Data & konten
 
-- [ ] **Logo resmi** (SVG/PNG resolusi tinggi) — lihat `docs/ASSETS.md`.
+- [x] **Logo resmi** PPMI Mesir — sudah dipasang (versi SVG opsional untuk ketajaman).
 - [ ] **Nomor darurat Mesir yang sudah diverifikasi** (ambulans, polisi, pemadam, dll.) beserta tanggal verifikasi.
 - [ ] **Kontak Menkes PPMI Mesir** dan **kontak Satgas Kesehatan** (nama peran, nomor/WhatsApp, kegunaan). Sebutkan apakah boleh ditampilkan publik.
 - [ ] **Kontak KBRI Kairo** untuk urusan kesehatan, bila relevan.

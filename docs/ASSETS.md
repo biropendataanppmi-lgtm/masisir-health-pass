@@ -16,11 +16,14 @@ Total asli 9 MB → turunan web 2.2 MB untuk semua ukuran (browser hanya mengund
 
 Catatan: foto `nursing-training` menampilkan wajah model stok Pexels (bukan pasien Masisir). Foto `patient-monitor` memperlihatkan merek perangkat; tidak masalah untuk dekorasi tetapi dapat diganti bila diinginkan.
 
+## Logo
+
+Logo resmi PPMI Mesir (PNG 1551×1998, latar transparan) disimpan di `assets/originals/logo-ppmi-mesir.png`. Turunan web: `public/images/logo-ppmi-mesir-{96,192}.{png,webp}` (dipangkas ke area logo), `public/favicon-32.png`, `public/apple-touch-icon.png`. Dipakai di header, footer, menu mobile, dan halaman `/admin` melalui `src/components/BrandMark.tsx`. Versi SVG akan lebih tajam bila tersedia.
+
 ## Aset yang belum tersedia
 
 | Aset | Status sementara | Cara mengganti |
 | --- | --- | --- |
-| **Logo resmi** Masisir Health Pass / Menkes PPMI Mesir | Tanda sementara sederhana (kartu + tanda plus) di `src/components/BrandMark.tsx` dan `public/favicon.svg` | Kirim logo (SVG lebih baik). Ganti isi `BrandMark.tsx` dengan `<img src="/images/logo.svg">` dan perbarui favicon. |
 | Foto fasilitas kesehatan | Placeholder "Foto fasilitas belum tersedia" | Diunggah lewat dashboard (Phase 2) ke kolom `facilities.photo_url` |
 | Foto kegiatan/program Masisir | Memakai foto stok; program tanpa foto menampilkan placeholder | Diunggah lewat dashboard (Phase 2) |
 | Ilustrasi medis / infografis | Belum ada | Dapat ditambahkan ke `public/images/` atau sebagai sampul artikel |
