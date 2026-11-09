@@ -1,17 +1,39 @@
 # Deploy ke Cloudflare
 
-Belum pernah di-deploy. Langkah berikut untuk pertama kali (butuh akun Cloudflare organisasi):
+Worker produksi: `masisir-health-pass` (https://masisir-health-pass.biropendataanppmi.workers.dev), terhubung ke GitHub lewat **Cloudflare Workers Builds**. Setiap push/merge ke `main` membangun dan men-deploy otomatis.
+
+## Pengaturan Workers Builds (sekali saja)
+
+Di dashboard Cloudflare → Workers & Pages → `masisir-health-pass` → Settings → Build:
+
+| Pengaturan | Nilai |
+| --- | --- |
+| Production branch | `main` |
+| Build command | `npm run build` |
+| Deploy command | `npm run deploy` |
+| Root directory | `/` |
+
+`wrangler.jsonc` juga punya `build.command`, jadi `npx wrangler deploy` saja tetap membangun situs terlebih dahulu. `npm run deploy` menjalankan `wrangler deploy` lalu `wrangler d1 migrations apply DB --remote`, sehingga skema database selalu ikut diperbarui. Jika deploy command dibiarkan `npx wrangler deploy`, situs tetap terbit tetapi API akan error karena tabel belum dibuat.
+
+## Konfigurasi
+
+- **Produksi** = konfigurasi tingkat atas di `wrangler.jsonc`: `APP_ENV=production`, database D1 `masisir-health-pass`. Tidak ada `database_id`: Wrangler mencari database berdasarkan nama atau membuatnya otomatis saat deploy pertama.
+- **Pengembangan lokal** = `env.development` (`npm run dev` memakai `CLOUDFLARE_ENV=development`), database lokal `masisir-health-pass-dev` berisi data [CONTOH].
+- **Jangan** menjalankan `seed/dev-sample.sql` ke database produksi. Bila terjadi, baris contoh tetap disaring oleh Worker karena `APP_ENV=production`.
+- Secret (Phase 2, mis. konfigurasi Cloudflare Access) diset di dashboard (Settings → Variables and Secrets) atau `wrangler secret put NAMA`, tidak pernah di repo.
+
+## Deploy manual (cadangan)
 
 ```bash
 npx wrangler login
-npx wrangler d1 create masisir-health-pass-prod
-# salin database_id ke env.production.d1_databases di wrangler.jsonc
-npx wrangler d1 migrations apply masisir-health-pass-prod --remote --env production
 npm run build
-npx wrangler deploy --env production
+npm run deploy
 ```
 
-- **Jangan** menjalankan `seed/dev-sample.sql` di produksi. (Bila terjadi, baris contoh tetap disaring oleh Worker karena `APP_ENV=production`.)
-- Environment `development` (default) dan `production` dipisah di `wrangler.jsonc`, masing-masing dengan database sendiri.
-- Secret (Phase 2, mis. konfigurasi Cloudflare Access) diset dengan `wrangler secret put NAMA --env production`, tidak pernah di repo.
-- Backup: D1 Time Travel menyediakan pemulihan titik waktu (30 hari pada paket berbayar, 7 hari gratis). Untuk arsip tambahan: `wrangler d1 export masisir-health-pass-prod --remote --output backup.sql` secara berkala.
+## Backup
+
+D1 Time Travel menyediakan pemulihan titik waktu (7 hari pada paket gratis, 30 hari pada paket berbayar). Untuk arsip tambahan, ekspor berkala:
+
+```bash
+npx wrangler d1 export masisir-health-pass --remote --output backup-$(date +%F).sql
+```

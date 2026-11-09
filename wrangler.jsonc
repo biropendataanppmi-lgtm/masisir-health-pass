@@ -5,31 +5,45 @@
   "compatibility_date": "2026-10-01",
   "compatibility_flags": ["nodejs_compat"],
   "observability": { "enabled": true },
+  // Lets a plain `npx wrangler deploy` (Workers Builds' default deploy
+  // command) build the site first, even when no build command is set.
+  "build": { "command": "npx vite build" },
   "assets": {
+    // Used only when Wrangler deploys without Vite (e.g. a plain
+    // `npx wrangler deploy`); the Vite plugin sets this itself.
+    "directory": "./dist/client",
     // SPA: unknown non-API paths fall back to index.html; /api/* always hits the Worker.
     "not_found_handling": "single-page-application",
     "run_worker_first": ["/api/*"]
   },
+
+  // ---------------------------------------------------------- production
+  // The top-level config is what `npm run build` + `wrangler deploy`
+  // (and Cloudflare Workers Builds) deploy. APP_ENV=production makes the
+  // Worker hide every sample row, even if one is seeded by mistake.
   "vars": {
-    "APP_ENV": "development"
+    "APP_ENV": "production"
   },
   "d1_databases": [
     {
       "binding": "DB",
+      // No database_id: Wrangler finds the database by name, or creates it
+      // on the first deploy. Add the id here later if you prefer pinning it.
       "database_name": "masisir-health-pass",
-      // Replace with the real id from `wrangler d1 create masisir-health-pass`.
-      // Local development (`npm run dev`) does not need a real id.
-      "database_id": "00000000-0000-0000-0000-000000000000",
       "migrations_dir": "migrations"
     }
   ],
+
   "env": {
-    "production": {
-      "vars": { "APP_ENV": "production" },
+    // --------------------------------------------------- local development
+    // Used by `npm run dev` and the db:*:local scripts (CLOUDFLARE_ENV /
+    // --env development). Shows [CONTOH] sample data from seed/.
+    "development": {
+      "vars": { "APP_ENV": "development" },
       "d1_databases": [
         {
           "binding": "DB",
-          "database_name": "masisir-health-pass-prod",
+          "database_name": "masisir-health-pass-dev",
           "database_id": "00000000-0000-0000-0000-000000000000",
           "migrations_dir": "migrations"
         }
