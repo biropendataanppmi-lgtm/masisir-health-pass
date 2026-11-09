@@ -1,0 +1,39 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "masisir-health-pass",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": { "enabled": true },
+  "assets": {
+    // SPA: unknown non-API paths fall back to index.html; /api/* always hits the Worker.
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*"]
+  },
+  "vars": {
+    "APP_ENV": "development"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "masisir-health-pass",
+      // Replace with the real id from `wrangler d1 create masisir-health-pass`.
+      // Local development (`npm run dev`) does not need a real id.
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "env": {
+    "production": {
+      "vars": { "APP_ENV": "production" },
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "masisir-health-pass-prod",
+          "database_id": "00000000-0000-0000-0000-000000000000",
+          "migrations_dir": "migrations"
+        }
+      ]
+    }
+  }
+}
